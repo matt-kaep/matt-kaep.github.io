@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Medical imaging project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="index.html" class="title">Projects</a>
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="medical_imaging_project.html" class="active">Medical Imaging - Skin lesion segmentation</a></li>
+						<li><a href="manipulation_of_GANs.html">Manipulation of GANs</a></li>
+						<li><a href="elevendoc.html">Elevendoc</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<section id="main" class="wrapper">
+						<div class="inner">
+							<h1 class="major">Segmentation and Classification of skin lesion using Deep Learning methods</h1>
+						
+							<h2>Introduction</h2>
+							<p>Skin cancer is a significant public health issue, affecting millions globally. Early detection is crucial for effective treatment and improved survival rates. This project leverages Deep Learning and ABCD (Asymmetry, Border irregularity, Color variation, Diameter) feature extraction methods to classify and segment skin lesions. The goal is to develop a robust automated system for early skin cancer detection, comparing traditional ABCD analysis with advanced CNN-based methods.</p>
+
+							<h2>Project Overview</h2>
+							<p>This project is structured into several key steps, each focusing on a crucial aspect of the skin lesion analysis pipeline. The main phases include data preprocessing, segmentation, feature extraction, and classification.</p>
+
+							<h2>Methodology</h2>
+
+							<h3>Data Preprocessing</h3>
+							<p>The preprocessing phase aims to clean and standardize the image data to enhance the performance of the segmentation and classification models. The key steps involved are:</p>
+
+							<h4>Hair Removal</h4>
+							<p>The DullRazor algorithm is used to detect and remove hair from the images. This involves:</p>
+							<ul>
+								<li>Converting the image to grayscale.</li>
+								<li>Applying a black hat filter.</li>
+								<li>Using Gaussian Blur and binary thresholding.</li>
+								<li>Inpainting the image to fill in the removed hair regions.</li>
+							</ul>
+
+							<h4>Artifact Removal</h4>
+							<p>The Dark Artefact Removal Algorithm targets black corners and other unwanted artifacts in the images. This process includes:</p>
+							<ul>
+								<li>Identifying and masking dark artifacts.</li>
+								<li>Inpainting the masked regions to ensure smooth and artifact-free images.</li>
+							</ul>
+
+							<h4>Resizing and Padding</h4>
+							<p>Images are resized to a uniform size (256x256 pixels) using zero-padding to maintain aspect ratios and prepare them for further analysis.</p>
+
+							<h3>Segmentation</h3>
+							<p>Segmentation aims to isolate the lesion from the surrounding skin. The methodology includes:</p>
+							<ul>
+								<li>Multiple Segmentation Masks: Using a combination of global thresholding, dynamic thresholding, and color clustering techniques to generate multiple segmentation masks.</li>
+								<li>Mask Selection Rules: Implementing rules to select the most accurate mask:</li>
+								<ul>
+									<li>Reject masks growing into image borders or without detected regions.</li>
+									<li>Discard fragments at image borders and the smallest masks.</li>
+									<li>Choose masks with consistent areas compared to others.</li>
+								</ul>
+								<li>Union Mask: Combining the selected masks to form a final segmentation mask.</li>
+								<li>Post-Processing: Applying the Dark Artefact Removal mask to clean the segmented regions.</li>
+							</ul>
+
+							<h3>Feature Extraction</h3>
+							<p>Feature extraction focuses on deriving meaningful attributes from the segmented lesions using the ABCD methodology:</p>
+							<ul>
+								<li>Total Area: Calculating the total area of the lesion.</li>
+								<li>Perimeter and Compactness Index: Measuring the perimeter and calculating the compactness index (ratio of squared perimeter to area).</li>
+								<li>Diameter: Determining the maximum dimension of the lesion's bounding box.</li>
+								<li>Color Variegation: Assessing color variation within the lesion using the standard deviation of RGB channels.</li>
+								<li>Texture Features: Extracting texture features (correlation, homogeneity, energy, contrast) using the Gray-Level Co-occurrence Matrix (GLCM).</li>
+							</ul>
+
+							<h3>Classification</h3>
+							<p>Two classification approaches are compared: Random Forest using ABCD features and Convolutional Neural Networks (CNN):</p>
+							<ul>
+								<li>Random Forest Classifier:</li>
+								<ul>
+									<li>Data Preparation: One-hot encoding of categorical metadata and balancing the dataset through oversampling.</li>
+									<li>Model Training: Training a Random Forest classifier with the extracted features.</li>
+									<li>Evaluation: Assessing model performance using appropriate metrics.</li>
+								</ul>
+							</ul>
+							
+							<!-- Button Section -->
+							<div style="text-align: center; margin-top: 100px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center; gap: 100px;">
+								<a href="project_results.html" class="button" style="padding: 0.2em 1em; font-size: 0.7em; min-width: 150px; text-align: center; display: inline-block;">View Project Report</a>
+								<a href="https://github.com/yourusername/medical-imaging-project" target="_blank" class="icon brands fa-github" style="font-size: 3em; text-decoration: none; transition: transform 0.3s ease;"></a>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

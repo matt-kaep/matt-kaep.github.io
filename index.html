@@ -9,11 +9,30 @@
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<style>
 			#sidebar {
-				width: 18%; /* Reduced size */
+				width: 15%; /* Sidebar width */
+				max-width: 15%; /* Ensure the sidebar doesn't exceed this width */
+				transition: width 0.5s ease, opacity 0.5s ease;
+				background-size: auto !important; /* Override background sizing */
+				flex-basis: 15% !important; /* Override flex basis if used */
 			}
+			
+			#sidebar:before {
+				width: 30%; /* Make sure the pseudo-element background matches the sidebar width */
+				max-width: 30%;
+			}
+			
 			#wrapper {
-				margin-left: 10%; /* Adjusted to match sidebar size */
+				margin-left: 15%; /* Match the sidebar width */
+				transition: margin-left 0.5s ease;
+				width: 85%; /* Make wrapper take the remaining space */
 			}
+			
+			#footer {
+				margin-left: 15%; /* Match the sidebar width */
+				transition: margin-left 0.5s ease;
+				width: 85%; /* Make footer take the remaining space */
+			}
+			
 			/* Styling for larger social icons */
 			.social-links {
 				display: flex;
@@ -28,11 +47,88 @@
 			}
 			.social-links .icon.brands:hover {
 				transform: scale(1.2);
+				}
+			
+			/* Hamburger button styling */
+			#hamburger-button {
+				position: fixed;
+				top: 20px;
+				left: 20px;
+				z-index: 1000;
+				background-color: rgba(94, 66, 166, 0.8);
+				color: white;
+				border: none;
+				border-radius: 5px;
+				width: 50px;
+				height: 50px;
+				cursor: pointer;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				transition: background-color 0.3s ease, left 0.5s ease;
+			}
+			
+			#hamburger-button:hover {
+				background-color: rgba(183, 78, 145, 0.9);
+			}
+			
+			#hamburger-button span {
+				display: block;
+				width: 25px;
+				height: 3px;
+				margin: 2px 0;
+				background-color: white;
+				border-radius: 3px;
+				transition: transform 0.3s ease;
+			}
+			
+			/* Sidebar hidden state */
+			#sidebar.hidden {
+				width: 0;
+				opacity: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			
+			/* Wrapper adjustment when sidebar is hidden */
+			body.sidebar-hidden #wrapper {
+				margin-left: 0;
+				width: 100%;
+			}
+			
+			body.sidebar-hidden #footer {
+				margin-left: 0;
+				width: 100%;
+				}
+			
+			/* Move hamburger button when sidebar is hidden */
+			body.sidebar-hidden #hamburger-button {
+				left: 20px;
+			}
+			
+			/* Override any template default styling that might interfere */
+			@media screen and (min-width: 737px) {
+				#sidebar {
+					width: 15% !important;
+					max-width: 15% !important;
+				}
+				
+				#sidebar:before {
+					width: 15% !important;
+					max-width: 15% !important;
+				}
 			}
 		</style>
 	</head>
 	<body class="is-preload">
 
+		<!-- Hamburger Button -->
+		<button id="hamburger-button" aria-label="Toggle Sidebar">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
 
 		<!-- Sidebar -->
 			<section id="sidebar">
@@ -48,6 +144,7 @@
 					</nav>
 				</div>
 			</section>
+		
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -64,11 +161,12 @@
 							</ul>
 						</div>
 					</section>
+					
 
 				<!-- One -->
 					<section id="one" class="wrapper style2 spotlights">
 						<section>
-							<a href="#" class="image"><img src="images/medical_imaging.png" alt="" data-position="center center" /></a>
+							<a href="#" class="image"><img src="images/key_projects_illustrations/medical_imaging.png" alt="" data-position="center center" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Medical Image Segmentation and Classification</h2>
@@ -79,13 +177,13 @@
 										</ul>
 									</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="medical_imaging_project.html" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/GAN.png" alt="" data-position="top center" /></a>
+							<a href="#" class="image"><img src="images/key_projects_illustrations/GAN.png" alt="" data-position="top center" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Realistic Face Generation and Attribute Manipulation with GANs</h2>
@@ -95,13 +193,13 @@
 										such as age and the presence of glasses, directly in the model's latent space. See how AI can generate lifelike faces and control attributes with precision.
 									</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="manipulation_of_GANs.html" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
 						</section>
 						<section>
-							<a href="#" class="image"><img src="images/elevendoc.png" alt="" data-position="25% 25%" /></a>
+							<a href="#" class="image"><img src="images/key_projects_illustrations/elevendoc.png" alt="" data-position="25% 25%" /></a>
 							<div class="content">
 								<div class="inner">
 									<h2>Elevendoc</h2>
@@ -109,7 +207,7 @@
 										Readme and advisory file for your python project.
 									</p>
 									<ul class="actions">
-										<li><a href="generic.html" class="button">Learn more</a></li>
+										<li><a href="elevendoc.html" class="button">Learn more</a></li>
 									</ul>
 								</div>
 							</div>
@@ -158,9 +256,7 @@
 										Solid basis in Retrieval-Augmented Generation (RAG) solutions to enhance document retrieval accuracy and streamline data workflows.</p>
 								</section>
 							</div>
-							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
-								</ul>
+							
 						</div>
 					</section>
 
@@ -172,7 +268,7 @@
 							<div class="spotlights">
 								<!-- Section 1: Télécom Paris Education -->
 								<section>
-									<a href="#" class="image"><img src="images/logo_telecom.png" alt="" /></a>
+									<a href="#" class="image"><img src="images/blason_ecole/logo_telecom.png" alt="" /></a>
 									<div class="content">
 										<div class="inner">
 											<h3>Télécom Paris (2022 - 2025)</h3>
@@ -189,7 +285,7 @@
 
 								<!-- Section 2: Preparatory Classes & French Baccalaureate -->
 								<section>
-									<a href="#" class="image"><img src="images/blason_stan/blason_stanislas_300x500.png" alt="" /></a>
+									<a href="#" class="image"><img src="images/blason_ecole/blason_stanislas_300x500.png" alt="" /></a>
 									<div class="content">
 										<div class="inner">
 											<h3>2020-2022 - Preparatory Classes - Stanislas</h3>
@@ -205,7 +301,7 @@
 
 								<!-- Section 3: Previous Academic Background -->
 								<section>
-									<a href="#" class="image"><img src="images/blason_sjp.png" alt="" /></a>
+									<a href="#" class="image"><img src="images/blason_ecole/blason_sjp.png" alt="" /></a>
 									<div class="content">
 										<div class="inner">
 											<h3>2019 - French Scientific Baccalaureate (Highest Honors)</h3>
@@ -257,14 +353,6 @@
 
 			</div>
 
-		<!-- Footer -->
-			<footer id="footer" class="wrapper style1-alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -275,8 +363,33 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-				document.getElementById('sidebar-toggle').addEventListener('click', function() {
-					document.getElementById('sidebar').classList.toggle('hidden');
+				// Toggle sidebar visibility
+				document.getElementById('hamburger-button').addEventListener('click', function() {
+					const sidebar = document.getElementById('sidebar');
+					sidebar.classList.toggle('hidden');
+					document.body.classList.toggle('sidebar-hidden');
+					
+					// Animate hamburger button
+					const spans = this.querySelectorAll('span');
+					if (sidebar.classList.contains('hidden')) {
+						spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+						spans[1].style.opacity = '0';
+						spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+					} else {
+						spans[0].style.transform = 'none';
+						spans[1].style.opacity = '1';
+						spans[2].style.transform = 'none';
+					}
+				});
+				
+				// Close sidebar when clicking on navigation links (for mobile)
+				document.querySelectorAll('#sidebar nav a').forEach(link => {
+					link.addEventListener('click', function() {
+						if (window.innerWidth <= 736) { // Only for mobile view
+							document.getElementById('sidebar').classList.add('hidden');
+							document.body.classList.add('sidebar-hidden');
+						}
+					});
 				});
 			</script>
 

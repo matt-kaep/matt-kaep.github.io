@@ -3461,7 +3461,12 @@ input, select, textarea {
 /* Wrapper (main) */
 
 	#sidebar + #wrapper {
-		margin-left: 18em;
+		margin-left: 15em;
+		transition: margin-left 0.5s ease;
+	}
+
+	body.sidebar-hidden #sidebar + #wrapper {
+		margin-left: 0;
 	}
 
 		@media screen and (max-width: 1280px) {
@@ -3488,7 +3493,12 @@ input, select, textarea {
 /* Footer */
 
 	#sidebar + #wrapper + #footer {
-		margin-left: 18em;
+		margin-left: 15em;
+		transition: margin-left 0.5s ease;
+	}
+
+	body.sidebar-hidden #sidebar + #wrapper + #footer {
+		margin-left: 0;
 	}
 
 		@media screen and (max-width: 1280px) {
@@ -3529,7 +3539,17 @@ input, select, textarea {
 		position: fixed;
 		text-align: right;
 		top: 0;
-		width: 18%;
+		width: 15%;
+		z-index: 10;
+		transition: width 0.5s ease, opacity 0.5s ease, padding 0.5s ease;
+	}
+
+	/* When sidebar is hidden */
+	#sidebar.hidden {
+		width: 0;
+		padding: 0;
+		opacity: 0;
+		overflow: hidden;
 	}
 
 		#sidebar > .inner {
@@ -3864,6 +3884,20 @@ input, select, textarea {
 			}
 
 		}
+
+/* Hamburger Button Responsive Adjustments */
+@media screen and (max-width: 736px) {
+	#hamburger-button {
+		top: 10px;
+		left: 10px;
+		width: 40px;
+		height: 40px;
+	}
+	
+	#hamburger-button span {
+		width: 20px;
+	}
+}
 
 /* Intro */
 
